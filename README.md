@@ -1,6 +1,6 @@
 # SyntaxDB, a lightweight, easy-to-use, scalable serverless database.
 
-I made SyntaxDB out of the frustration I have with modern server databases.
+We made SyntaxDB out of the frustration We have with modern server databases.
 
 - They can be really resource intensive and expensive (MongoDB)
 - They are obsolete, sluggish and don't work well with hosts now-a-days. (MySQL)
@@ -40,13 +40,13 @@ JSONDUMP: Dump data from a JSON file.
 
 GET: Get data from a structure.
 
-(Note: this is more of a hobby project and I'd rather quite fancy showing this to my teacher, to show that I'm not empty-headed!)
-(Oh, also, I'll use this for my commercial projects, you can too!)
+(Note: this is more of a hobby project and we'd rather quite fancy showing this to our teacher, to show that we're not empty-headed!)
+(Oh, also, we'll use this for my commercial projects, you can too!)
 (This'll stay open-source forever too, btw, so it'll be getting updates frequently.)
 (Please, if any of you security fellas are out there, please point out vulnerabilities.)
 
 
 Made by
 
-xTryambak
+xTryambak & 
 Lalithendra
