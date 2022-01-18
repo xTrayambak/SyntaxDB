@@ -69,7 +69,7 @@ class FUNCTIONS:
             "help": "Save or 'dump' all the data inside the data (including structures and their children values) to the local [dbname].syntaxdb"
             }
     JSONDUMP = {"cmd": "jsondump", "args": [], "function": jsonDUMP, "help": "Get all the data and dump it to a JSON file."}
-    JSONLOAD = {"cmd": "jsonload", "args": [], "function": jsonLOAD, "help": "Load a data from a JSON file."},
+    JSONLOAD = {"cmd": "jsonload", "args": [], "function": jsonLOAD, "help": "Load a data from a JSON file."}
     
     TRANSMISSIONSTART = {"cmd": "transmit", "args": [], "function": transmissionserverstart, "help": "Start a 'transmission' server which can let anyone with the correct password transfer data from your database (note: this server will stop if your Python instance stops, and will not turn back on again unless this command is typed in again)"}
 

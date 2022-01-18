@@ -43,7 +43,7 @@ class Database:
         self.logger_warn.warn(f"[{sender}/WARN] :: {msg}")
 
     def logp(self, msg: str):
-        self.logger_info.log(f"* {msg}")
+        self.logger_info.log(msg = f"* {msg}", level = logging.INFO)
 
     def query(self, command: str):
         thread = ThreadPool(processes = 1)

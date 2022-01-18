@@ -1,7 +1,14 @@
 import flask
 from flask import request
 
+from logging import getLogger
+
 from multiprocessing.pool import ThreadPool
+from threading import Thread
+
+# Disable the Werkzeug Logger because it's going to spam the console.
+werkzeug = getLogger("werkzeug")
+werkzeug.disabled = True
 
 class TransmissionServer:
     def __init__(self, db, password: str, host: str = "localhost", port: int = 8000):
@@ -17,13 +24,15 @@ class TransmissionServer:
         def run(): self.flaskApp.run(host,port)
 
         try:
-            db.server_pool = ThreadPool(1)
-            db.server_pool.apply_async(run, args = ())
+            db.server_pool = Thread(target = run, args = ())
+            self.hookup()
+            db.server_pool.start()
         except Exception as exc:
-            db.logp(f"* An error has occured whilst trying to host the servers. [Exception(message={exc})]")
+            db.logp(f"* An error has occured whilst trying to host the transmission service. [Exception(message={exc})]")
             return -1
 
         db.logp(f"Transmission server has started on address [{host}:{port}] with password '{password}'")
+        return "* Successfully started server!"
 
     def hookup(self):
         @self.flaskApp.route("/sdbdatatransfer")
