@@ -24,12 +24,15 @@ Future Features:
 
 # Command Syntax:
 Current:
-function <args>
+
+function args
+
 Future:
-function <arg>(type) <arg2>(type)
+
+function arg(type) arg2(type)
 
 # Commands:
-DUMP: Save the file to your Python script's local directory as <dbname>.syntaxdb
+DUMP: Save the file to your Python script's local directory as [dbname].syntaxdb
 JSONLOAD: Load data from a JSON file.
 JSONDUMP: Dump data from a JSON file.
 GET: Get data from a structure.
