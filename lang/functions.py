@@ -1,4 +1,7 @@
 from db.transmission import TransmissionServer
+from db.receiver import DataReceiver
+
+import socket
 
 def create(args, db):
     name = args[0]
@@ -48,6 +51,15 @@ def help(args, db):
 
     * JSONDUMP
     \t-Dump data to a JSON file. Useful for transferring data to another database easily.
+
+    * TRANSMIT
+    \t-Start a server with a password, if the password given is correct by a client request, then the data from this database is transferred to them.
+
+    * TRANSMITSTOP
+    \t-Stop a file transmitter session.
+
+    * RECEIVE
+    \t-Receive a stream of JSON data from a given URL and password.
     """
 
 def jsonDUMP(args, db):
@@ -66,3 +78,39 @@ def transmissionserverstart(args, db):
     )
 
     db.server = server
+
+def transmissionserverstop(args, db):
+    server = db.server_pool
+
+    if server is None:
+        db.logp("No transmission server is active that can be disabled!")
+        return -1
+
+    server.kill()
+    db.logp("Stopped transmission service.")
+
+def receive(args, db):
+    url = str(args[0])
+    port = int(args[1])
+    password = str(args[2])
+
+    db.logp(f"Locating [{url}]... This may take a minute.")
+
+    ip = socket.gethostbyname(url)
+
+    db.logp(f"URL: {url}")
+    db.logp(f"IP: {ip}")
+
+    if not url.startswith("http"):
+        url = "http://" + url
+
+    dataReceiver = DataReceiver(url, port, password)
+
+    db.logp(f"Now, asynchronously requesting {url}/sdbdatatransfer [DataReceiver instantiated.]")
+    results = dataReceiver.run()
+
+    db.logp(results)
+
+    db.logp("Results have been modified to the non-live database. Call [DUMP] to save changes.")
+
+    db.data = results

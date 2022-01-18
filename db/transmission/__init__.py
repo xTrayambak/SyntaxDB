@@ -28,10 +28,8 @@ class TransmissionServer:
             db.server_pool.start()
         except Exception as exc:
             db.logp(f"* An error has occured whilst trying to host the transmission service. [Exception(message={exc})]")
-            return -1
 
         db.logp(f"Transmission server has started on address [{host}:{port}] with password '{password}'")
-        return "* Successfully started server!"
 
     def hookup(self):
         @self.flaskApp.route("/sdbdatatransfer")
@@ -62,6 +60,11 @@ class TransmissionServer:
                         "db": f"SyntaxDB {self.db.version}"
                     }
                 )
+
+    def kill(self):
+        self.db.logp(f"Transmission server is stopping...")
+        self.db.server_pool.join()
+        self.db.logp(f"Werkzeug server thread has been killed. TransmissionServer has shut down successfully.")
 
     def stop(self):
         self.db.logp(f"Stopping transmission server on address [{self.host}:{self.port}] with password '{self.password}'")

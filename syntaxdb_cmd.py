@@ -6,4 +6,6 @@ if __name__ == "__main__":
     db.load()
     
     while True:
-        print(db.query(input("Enter a SyntaxDB command . . . ")))
+        data = db.query(input("Enter a SyntaxDB command . . . "))
+        if data != None:
+            print(data)

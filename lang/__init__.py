@@ -12,6 +12,8 @@ class Parser:
         return string.split(" ")
 
     def parse(self, string: str, db):
+        if len(string) < 1:
+            return
         tokens = self.get_tokens(string)
 
         func = tokens[0]
@@ -52,7 +54,7 @@ class Parser:
                         error_string += f"\n* {name} -- {help}"
 
                     return error_string
-                
+                    
                 try:
                     return data['function'](args, db)
                 except:

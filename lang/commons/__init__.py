@@ -72,7 +72,9 @@ class FUNCTIONS:
     JSONLOAD = {"cmd": "jsonload", "args": [], "function": jsonLOAD, "help": "Load a data from a JSON file."}
     
     TRANSMISSIONSTART = {"cmd": "transmit", "args": [], "function": transmissionserverstart, "help": "Start a 'transmission' server which can let anyone with the correct password transfer data from your database (note: this server will stop if your Python instance stops, and will not turn back on again unless this command is typed in again)"}
+    TRANSMISSIONSTOP = {"cmd": "transmitstop", "args": [], "function": transmissionserverstop, "help": "Stop a 'transmission' server/service which is running."}
 
+    RECEIVE = {"cmd": "receive", "args": [], "function": receive, "help": "Receive data from a custom SyntaxDB hosted server."}
     HELP = {"cmd": "help", "args": [], "function": help, "help": "How. Why. How did you do this. I have many questions."}
 
 class TokenType:
