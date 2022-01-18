@@ -1,3 +1,5 @@
+from db.transmission import TransmissionServer
+
 def create(args, db):
     name = args[0]
     db.data.update(
@@ -40,6 +42,12 @@ def help(args, db):
 
     * DUMP
     \t-Perform binary serialization and save the current database to [databasename].scaledb
+
+    * JSONLOAD
+    \t-Load data from a JSON file. Useful for porting your JSON files to SyntaxDB.
+
+    * JSONDUMP
+    \t-Dump data to a JSON file. Useful for transferring data to another database easily.
     """
 
 def jsonDUMP(args, db):
@@ -47,3 +55,14 @@ def jsonDUMP(args, db):
 
 def jsonLOAD(args, db):
     return db.jsonport(args[0])
+
+def transmissionserverstart(args, db):
+    host = str(args[0])
+    port = int(args[1])
+    password = str(args[2])
+
+    server = TransmissionServer(
+        db, password, host, port
+    )
+
+    db.server = server

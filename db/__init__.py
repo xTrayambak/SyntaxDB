@@ -19,6 +19,9 @@ class Database:
         self.location = os.getcwd()
         self.query_threads = []
 
+        self.server_pool = None
+        self.server = None
+
         self.converter = DBConverter()
 
         self.parser = Parser()
@@ -38,6 +41,9 @@ class Database:
 
     def warn(self, sender: str = "SyntaxDB/Worker", msg: str = "This is a substitute warning!"):
         self.logger_warn.warn(f"[{sender}/WARN] :: {msg}")
+
+    def logp(self, msg: str):
+        self.logger_info.log(f"* {msg}")
 
     def query(self, command: str):
         thread = ThreadPool(processes = 1)
@@ -104,3 +110,6 @@ class Database:
             file.close()
 
             return f"Saved to {filename} successfully."
+
+    def toJSONstr(self):
+        return self.data
