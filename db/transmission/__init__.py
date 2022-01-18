@@ -3,7 +3,6 @@ from flask import request
 
 from logging import getLogger
 
-from multiprocessing.pool import ThreadPool
 from threading import Thread
 
 # Disable the Werkzeug Logger because it's going to spam the console.
