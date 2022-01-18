@@ -48,5 +48,5 @@ GET: Get data from a structure.
 
 Made by
 
-xTryambak & 
+xTrayambak & 
 Lalithendra
