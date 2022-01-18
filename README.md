@@ -33,8 +33,11 @@ function arg(type) arg2(type)
 
 # Commands:
 DUMP: Save the file to your Python script's local directory as [dbname].syntaxdb
+
 JSONLOAD: Load data from a JSON file.
+
 JSONDUMP: Dump data from a JSON file.
+
 GET: Get data from a structure.
 
 (Note: this is more of a hobby project and I'd rather quite fancy showing this to my teacher, to show that I'm not empty-headed!)
