@@ -6,7 +6,7 @@ I made SyntaxDB out of the frustration I have with modern server databases.
 - They are obsolete, sluggish and don't work well with hosts now-a-days. (MySQL)
 - They are server-less and decent, but can only process 1 query at a time. (SQLite)
 
-My solution to all of that is: SyntaxDB!
+Our solution to all of that is: SyntaxDB!
 
 Not only can you use this to store game settings and other things, but since it's serverless, it can EASILY run on any host that lets you make files and edit them without "security" reasons (sob sob, Replit)
 
@@ -44,3 +44,9 @@ GET: Get data from a structure.
 (Oh, also, I'll use this for my commercial projects, you can too!)
 (This'll stay open-source forever too, btw, so it'll be getting updates frequently.)
 (Please, if any of you security fellas are out there, please point out vulnerabilities.)
+
+
+Made by
+
+xTryambak
+Lalithendra
