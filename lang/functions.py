@@ -2,6 +2,20 @@ from db.transmission import TransmissionServer
 from db.receiver import DataReceiver
 
 import socket
+import ast
+
+class Types:
+    STRING = "string"
+    INTEGER = "integer"
+    ARRAY = "array"
+    MAP = "map"
+
+TypeToConvert = {
+    Types.STRING: str,
+    Types.INTEGER: int,
+    Types.ARRAY: list,
+    Types.MAP: dict
+}
 
 def create(args, db):
     name = args[0]
@@ -13,6 +27,28 @@ def create(args, db):
 
     return db.data[name]
 
+def pop(args, db):
+    if args[0] in db.data:
+        db.data.pop(args[0])
+
+def instantiate(args, db):
+    structure = args[0]
+    name = args[1]
+    vargs = args[2].split("@")
+
+    value = vargs[0]
+    type = vargs[1]
+
+    value = ast.literal_eval(value)
+
+    db.data[structure].update(
+        {
+            name: value
+        }
+    )
+
+    db.logp(f"New value '{name}' added to database '{structure}'; call [DUMP] to save changes to live database.")
+
 def dump(args, db):
     try:
         db.save()
@@ -22,7 +58,15 @@ def dump(args, db):
     return 'Saved Successfully.'
 
 def all(args, db):
-    if len(args) > 1:
+    """for arg in args:
+        idx = args.index(arg)
+        if idx != 0:
+            if '.' in arg:
+                if args[0] in db.data:
+                    if arg in db.data[args[0]]:
+                        return db.data[args[0]]"""
+
+    if len(args) > 0:
         if args[0] in db.data:
             return db.data[args[0]]
         else:

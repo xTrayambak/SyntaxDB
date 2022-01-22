@@ -5,41 +5,17 @@ class ArgumentTag:
     REQUIRED = 0
 
 class FUNCTIONS:
-    CREATE = {"cmd": "create", 
+    CREATE = {
+            "cmd": "create", 
             "args": 
-            [{"name": "structure", 
-            "tags": [ArgumentTag.REQUIRED]}], 
-            "function": create
-            }
-
-    MAKE = {"cmd": "make", 
-            "args": [
-                        {"name": "structure", 
-                            "tags": [ArgumentTag.REQUIRED], 
-                            "help": "The structure to make the variable in."
-                        }, 
-
-                        {"name": "parent", 
-                            "tags": [ArgumentTag.REQUIRED],
-                            "help": "The parent of the variable."
-                        },
-
-                        {"name": "name",
-                            "tags": [ArgumentTag.REQUIRED],
-                            "help": "The name of the variable to put into the structure."
-                        },
-
-                        {"name": "value", 
-                            "tags": [ArgumentTag.REQUIRED],
-                            "help": "The value of the variable."
-                        },
-
-                        {"name": "type",
-                            "tags": [ArgumentTag.REQUIRED],
-                            "help": "The type of the variable. (eg., integer, map, array, string)"
-                        }
-                    ]
-            }
+            [
+                {   "name": "structure", 
+                    "tags": [ArgumentTag.REQUIRED], 
+                    "function": create,
+                    "help": "The structure name."
+                }
+            ]
+        }
 
     POP = {"cmd":"pop", 
         "args": [
@@ -49,6 +25,7 @@ class FUNCTIONS:
             "help": "The structure to pop."
             }
         ],
+        "function": pop,
         "help": "Pop a value inside a database."
     }
 
@@ -73,6 +50,8 @@ class FUNCTIONS:
     
     TRANSMISSIONSTART = {"cmd": "transmit", "args": [], "function": transmissionserverstart, "help": "Start a 'transmission' server which can let anyone with the correct password transfer data from your database (note: this server will stop if your Python instance stops, and will not turn back on again unless this command is typed in again)"}
     TRANSMISSIONSTOP = {"cmd": "transmitstop", "args": [], "function": transmissionserverstop, "help": "Stop a 'transmission' server/service which is running."}
+
+    INSTANTIATE = {"cmd": "new", "args": [], "function": instantiate, "help": "Create a new value inside a database."}
 
     RECEIVE = {"cmd": "receive", "args": [], "function": receive, "help": "Receive data from a custom SyntaxDB hosted server."}
     HELP = {"cmd": "help", "args": [], "function": help, "help": "How. Why. How did you do this. I have many questions."}
