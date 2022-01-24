@@ -25,11 +25,7 @@ Future Features:
 # Command Syntax:
 Current:
 
-function args
-
-Future:
-
-function arg(type) arg2(type)
+function arg@type arg1@type
 
 # Commands:
 DUMP: Save the file to your Python script's local directory as [dbname].syntaxdb
@@ -48,5 +44,4 @@ GET: Get data from a structure.
 
 Made by
 
-xTrayambak & 
-Lalithendra
+xTrayambak
