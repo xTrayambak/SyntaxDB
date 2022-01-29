@@ -37,8 +37,6 @@ def instantiate(args, db):
 
     value = args[2]
 
-    print("value: "+value)
-
     value = ast.literal_eval(value)
 
     db.data[structure].update(
