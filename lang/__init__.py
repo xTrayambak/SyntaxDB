@@ -54,11 +54,12 @@ class Parser:
                         error_string += f"\n* {name} -- {help}"
 
                     return error_string
-                    
+
                 try:
                     return data['function'](args, db)
                 except:
                     db.logp("An error occured whilst executing command.")
+                    return ''
 
         error_string = f"No command called '{func}' found."
 

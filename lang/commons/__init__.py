@@ -11,10 +11,10 @@ class FUNCTIONS:
             [
                 {   "name": "structure", 
                     "tags": [ArgumentTag.REQUIRED], 
-                    "function": create,
                     "help": "The structure name."
                 }
-            ]
+            ],
+            "function": create,
         }
 
     POP = {"cmd":"pop", 
@@ -55,6 +55,8 @@ class FUNCTIONS:
 
     RECEIVE = {"cmd": "receive", "args": [], "function": receive, "help": "Receive data from a custom SyntaxDB hosted server."}
     HELP = {"cmd": "help", "args": [], "function": help, "help": "How. Why. How did you do this. I have many questions."}
+
+    FIND = {"cmd": "find", "args": [], "function": find, "help": "Find a value inside the database from every structure."}
 
 class TokenType:
     FUNCTION = 0

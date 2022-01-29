@@ -34,10 +34,10 @@ def pop(args, db):
 def instantiate(args, db):
     structure = args[0]
     name = args[1]
-    vargs = args[2].split("@")
 
-    value = vargs[0]
-    type = vargs[1]
+    value = args[2]
+
+    print("value: "+value)
 
     value = ast.literal_eval(value)
 
@@ -104,6 +104,9 @@ def help(args, db):
 
     * RECEIVE
     \t-Receive a stream of JSON data from a given URL and password.
+
+    * FIND
+    \t-Find a value from any structure in the database.
     """
 
 def jsonDUMP(args, db):
@@ -154,7 +157,32 @@ def receive(args, db):
     results = dataReceiver.run()
 
     db.logp(results)
-
     db.logp("Results have been modified to the non-live database. Call [DUMP] to save changes.")
 
     db.data = results
+
+def find(args, db):
+    value = args[0]
+
+    for structure in db.data:
+        _data = db.data[structure]
+        for value in _data:
+            _value = _data[value]
+
+            if _value == _data:
+                return structure
+    return {}
+
+def modify(args, db):
+    structure = args[0]
+    name = args[1]
+
+    value = args[2]
+
+    value = ast.literal_eval(value)
+
+    if name not in db.data[structure]:
+        db.data[structure].update({name: value})
+    db.data[structure][name] = value
+
+    return db.data[structure][name]
