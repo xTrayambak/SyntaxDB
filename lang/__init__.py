@@ -1,4 +1,4 @@
-from lang.commons import FUNCTIONS, ArgumentTag, TypeToConvert, Types
+from syntaxdb.lang.commons import FUNCTIONS, ArgumentTag, TypeToConvert, Types
 import difflib
 
 def props(cls):   

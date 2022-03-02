@@ -7,8 +7,7 @@ from multiprocessing.pool import ThreadPool
 from pickle import dump, load
 
 from lang import Parser
-from db.exceptions import *
-from db.converter import DBConverter
+from syntaxdb.db.exceptions import *
 
 VERSION = "0.0.1_TESTING"
 
@@ -21,8 +20,6 @@ class Database:
 
         self.server_pool = None
         self.server = None
-
-        self.converter = DBConverter()
 
         self.parser = Parser()
         
@@ -65,9 +62,6 @@ class Database:
                 open(f"{self.location}/{self.name}.syntaxdb", "rb")
             )
 
-            if "version" not in self.data:
-                raise InvalidMetadata(f"'version' tag was not found in SyntaxDB file '{self.name}', the file is either corrupted or the tag has been edited and removed.")
-            
             version = self.data["version"]
 
             if version != VERSION:
@@ -78,21 +72,18 @@ class Database:
                 self.warn("SyntaxDB/Loader", f"File '{self.name}.syntaxdb' has a backup now.")
 
                 self.warn("SyntaxDB/Loader", f"Conversion is now starting, this may fail, so please use [{self.name}-BACKUP.syntaxdb] if it fails.")
-                self.converter.toNewVersion(self, self.data)
         except FileNotFoundError:
             self.warn("SyntaxDB/Loader", f"Encountered 'FileNotFoundError' whilst loading file '{self.name}.syntaxdb', the data will be loaded explicitly.")
             self.data = {"version": VERSION}
             open(f"{self.location}/{self.name}.syntaxdb", "w").close()
         except TypeError:
-            self.warn("ScaleDB/Loader", f"Encountered 'TypeError' whilst loading file '{self.name}.scaledb', data will be explicitly loaded with a template.")
+            self.warn("SyntaxDB/Loader", f"Encountered 'TypeError' whilst loading file '{self.name}.scaledb', data will be explicitly loaded with a template.")
             self.data = {"version": VERSION}
             open(f"{self.location}/{self.name}.syntaxdb", "w").close()
         except EOFError:
             self.data = {"version": VERSION}
 
     def jsonport(self, filename: str):
-        if os.path.exists(filename) != True:
-            raise NoJSONFileFound(f"No file called '{filename}' exists!")
 
         json_data = json.load(open(filename, "r"))
         self.data = dict(json_data)

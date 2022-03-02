@@ -1,4 +1,4 @@
-from lang.functions import *
+from syntaxdb.lang.functions import *
 
 class ArgumentTag:
     OPTIONAL = 1

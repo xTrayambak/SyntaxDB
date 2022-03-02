@@ -1,5 +1,5 @@
-from db.transmission import TransmissionServer
-from db.receiver import DataReceiver
+from syntaxdb.db.transmission import TransmissionServer
+from syntaxdb.db.receiver import DataReceiver
 
 import socket
 import ast
@@ -72,7 +72,10 @@ def all(args, db):
     else:
         return db.data
 
-def help(args, db):
+def help(args, db) -> str:
+    """
+    Return a help string.
+    """
     return """
     SyntaxDB, a fast, scalable, effortless to setup, cheap and flexible serverless database library for Python.
 
@@ -107,13 +110,22 @@ def help(args, db):
     \t-Find a value from any structure in the database.
     """
 
-def jsonDUMP(args, db):
+def jsonDUMP(args, db) -> any:
+    """
+    Dump JSON data to a file.
+    """
     return db.toJSON(args[0])
 
-def jsonLOAD(args, db):
+def jsonLOAD(args, db) -> any:
+    """
+    Load JSON data from a file.
+    """
     return db.jsonport(args[0])
 
-def transmissionserverstart(args, db):
+def transmissionserverstart(args, db) -> None:
+    """
+    Start a transmission server.
+    """
     host = str(args[0])
     port = int(args[1])
     password = str(args[2])
@@ -124,7 +136,10 @@ def transmissionserverstart(args, db):
 
     db.server = server
 
-def transmissionserverstop(args, db):
+def transmissionserverstop(args, db) -> int:
+    """
+    Stop a transmission server.
+    """
     server = db.server_pool
 
     if server is None:
@@ -134,7 +149,9 @@ def transmissionserverstop(args, db):
     server.kill()
     db.logp("Stopped transmission service.")
 
-def receive(args, db):
+    return 0
+
+def receive(args, db) -> int:
     url = str(args[0])
     port = int(args[1])
     password = str(args[2])
@@ -159,7 +176,12 @@ def receive(args, db):
 
     db.data = results
 
-def find(args, db):
+    return 1
+
+def find(args, db) -> dict:
+    """
+    Find the data structure/data value inside our database.
+    """
     value = args[0]
 
     for structure in db.data:
@@ -171,7 +193,10 @@ def find(args, db):
                 return structure
     return {}
 
-def modify(args, db):
+def modify(args, db) -> any:
+    """
+    Modify a key inside a data structure inside our database.
+    """
     structure = args[0]
     name = args[1]
 
